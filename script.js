@@ -1,6 +1,19 @@
 window.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('loaded');
   
+  // 🛡️ DEFENSIVE MENU CLEANER ENGINE
+  // Automatically finds and purges old unlinked links if an old HTML version loads
+  document.querySelectorAll('.dropdown-menu li, .sub-menu li').forEach(item => {
+    const link = item.querySelector('a');
+    if (link) {
+      const path = link.getAttribute('href');
+      // If the link points to about.html or team.html, delete it from the DOM instantly
+      if (path === 'about.html' || path === 'team.html') {
+        item.remove();
+      }
+    }
+  });
+
   // Device checks to handle layout adjustments inside mobile drawer arrays
   if (window.innerWidth <= 768) {
     const mobileHome = document.querySelector('.mobile-only-home');
@@ -22,11 +35,11 @@ if (menuToggle && dropdownMenu) {
   });
 }
 
-// Mobile sub-menu toggle handler 
+// Mobile sub-menu accordion link patch logic (Safely wrapped)
 if (mobileSubmenuTrigger && nestedDropdownLI) {
   mobileSubmenuTrigger.addEventListener('click', (e) => {
     if (window.innerWidth <= 768) {
-      e.preventDefault(); // Stop default hyperlink redirection
+      e.preventDefault(); // Stop default hyperlink navigation sequence
       nestedDropdownLI.classList.toggle('submenu-open');
     }
   });
@@ -41,14 +54,14 @@ document.querySelectorAll('.transition-link').forEach(link => {
     if (destination && destination !== '#' && !destination.includes(window.location.pathname)) {
       e.preventDefault();
       
-      // Close open UI layouts smoothly before running out-fades
+      // Close open layout windows smoothly before execution loop shifts
       if (menuToggle) menuToggle.classList.remove('active');
       if (dropdownMenu) dropdownMenu.classList.remove('mobile-open');
 
       document.body.classList.add('exiting');
       setTimeout(() => {
         window.location.href = destination;
-      }, 250); // Exact window sync running alongside curtain out-fade transition timings
+      }, 250); // Curtain out-fade layout synchronization window timer
     }
   });
 });
