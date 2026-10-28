@@ -6,9 +6,9 @@
 <title>Studio Troman - Home</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body, html { width: 100%; height: 100%; min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; background-color: #000; color: #fff; }
+  body, html { width: 100%; height: 100%; min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
   
-  /* Video Background Sizing Frame */
+  /* Shared Video Background Engine */
   .fullscreen-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 1; background-color: #000; }
   .desktop-video { position: absolute; top: 50%; left: 50%; width: 100vw; height: calc(100vw * (1000 / 2560)); min-height: 100vh; min-width: calc(100vh * (2560 / 1000)); transform: translate(-50%, -50%); object-fit: cover; display: block; }
   .mobile-video { display: none; }
@@ -18,60 +18,51 @@
     .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
   }
 
+  /* GLOBAL PAGE GLITCH TRANSITION CURTAIN */
+  .page-transition-curtain {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #0d0d0d; z-index: 9999; pointer-events: none;
+    opacity: 1; transition: opacity 0.4s ease-out;
+  }
+  .page-transition-curtain::before {
+    content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+    z-index: 10000; background-size: 100% 3px, 6px 100%;
+  }
+  /* Trigger state to drop curtain opacity on page entry */
+  body.loaded .page-transition-curtain { opacity: 0; }
+  
+  /* Trigger state to raise curtain opacity when user clicks away */
+  body.exiting .page-transition-curtain { opacity: 1; transition: opacity 0.25s ease-in; }
+
   /* Top Navigation Bar Container */
   .top-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0 40px;
-    height: 70px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    position: fixed; top: 0; left: 0; width: 100%; padding: 0 40px; height: 70px;
+    display: flex; justify-content: flex-start; align-items: center;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
-    z-index: 10;
-    /* Gentle animation for the nav menu on load */
-    animation: fadeInSmooth 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    z-index: 10; opacity: 0;
   }
+  body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
   /* Dropdown Menu Architecture */
   .dropdown { position: relative; display: inline-block; }
-  .dropdown-trigger { color: #fff; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; padding: 10px 15px; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); text-decoration: none; }
+  .dropdown-trigger { color: #fff; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; padding: 10px 15px; display: flex; align-items: center; gap: 8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); text-decoration: none; }
   .dropdown-trigger::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s ease; }
 
   .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgba(15, 15, 15, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 6px;
-    min-width: 200px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    list-style: none;
+    position: absolute; top: 100%; left: 0; background-color: rgba(15, 15, 15, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden;
+    transform: translateY(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); list-style: none;
   }
   .dropdown-menu a { color: rgba(255, 255, 255, 0.7); padding: 12px 20px; text-decoration: none; display: block; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.2s ease; text-align: left; }
 
   .nested-dropdown { position: relative; }
   .nested-dropdown > a::after { content: ' ▶'; font-size: 0.6rem; float: right; margin-top: 4px; }
   .sub-menu {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    background-color: rgba(20, 20, 20, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 6px;
-    min-width: 180px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.25s ease;
-    list-style: none;
+    position: absolute; top: 0; left: 100%; background-color: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; min-width: 180px;
+    opacity: 0; visibility: hidden; transform: translateX(10px); transition: all 0.25s ease; list-style: none;
   }
 
   .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -84,35 +75,32 @@
   /* Main content layout overlay */
   .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
   
-  /* CINEMATIC PERFORMANCE ANIMATION ENGINE */
-  @keyframes fadeInSmooth {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+  /* INTRO TEXT GLITCH KEYFRAMES */
+  @keyframes glitchIntro {
+    0% { opacity: 0; transform: translateY(15px) skewX(4deg); filter: blur(2px); }
+    60% { opacity: 0.8; transform: translateY(-2px) skewX(-2deg); filter: blur(0px); }
+    80% { transform: skewX(8deg); }
+    100% { opacity: 1; transform: translateY(0) skewX(0deg); }
   }
 
-  /* Company Logo Sizing & Animation Trigger */
+  /* Company Logo Setup */
   .company-logo { 
-    max-width: 450px; 
-    height: auto; 
-    display: block; 
-    filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5)); 
-    margin-bottom: 25px; 
-    opacity: 0;
-    animation: fadeInSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.2s; /* Loads slightly after background initializes */
+    max-width: 450px; height: auto; display: block; 
+    filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5)); margin-bottom: 25px; opacity: 0;
+  }
+  body.loaded .company-logo {
+    animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.15s;
   }
 
-  /* Company Description Text Style & Animation Trigger */
+  /* Description Text Style */
   p.blurb { 
-    font-size: 1.4rem; 
-    font-weight: 300; 
-    max-width: 600px; 
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.8); 
-    line-height: 1.6; 
-    letter-spacing: 0.5px; 
-    opacity: 0;
-    animation: fadeInSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.5s; /* Staggered to slide up after the logo settles */
+    font-size: 1.4rem; font-weight: 300; max-width: 600px; 
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.6; letter-spacing: 0.5px; opacity: 0;
+  }
+  body.loaded p.blurb {
+    animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.3s;
   }
 
   @media (max-width: 768px) {
@@ -127,18 +115,21 @@
 </head>
 <body>
 
+<!-- GLITCH CURTAIN BLOCK -->
+<div class="page-transition-curtain"></div>
+
 <nav class="top-navbar">
   <div class="dropdown">
-    <a href="index.html" class="dropdown-trigger">Home</a>
+    <a href="index.html" class="transition-link dropdown-trigger">Home</a>
     <ul class="dropdown-menu">
       <li class="nested-dropdown">
-        <a href="index.html">Games</a>
+        <a href="index.html" class="transition-link">Games</a>
         <ul class="sub-menu">
-          <li><a href="blighters.html">Blighters</a></li>
+          <li><a href="blighters.html" class="transition-link">Blighters</a></li>
         </ul>
       </li>
-      <li><a href="team.html">Team</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="team.html" class="transition-link">Team</a></li>
+      <li><a href="about.html" class="transition-link">About</a></li>
     </ul>
   </div>
 </nav>
@@ -156,6 +147,27 @@
   <img src="studiologo.png" alt="Studio Troman Logo" class="company-logo">
   <p class="blurb">Studio Troman is an independent game development studio dedicated to forging highly atmospheric worlds, striking visual narratives, and polished gameplay mechanics from the ground up.</p>
 </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+  });
+
+  // Dynamic Outbound Navigation Glitch Interceptor
+  document.querySelectorAll('.transition-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const destination = this.getAttribute('href');
+      // Ignore anchor loops or current file updates
+      if (destination && destination !== '#' && !destination.includes(window.location.pathname)) {
+        e.preventDefault();
+        document.body.classList.add('exiting');
+        setTimeout(() => {
+          window.location.href = destination;
+        }, 250); // Exact window sync gap running alongside CSS out-fade transition
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
