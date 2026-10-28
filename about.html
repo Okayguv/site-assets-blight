@@ -1,143 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About - Studio Troman</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body, html { width: 100%; height: 100%; min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
-  
-  /* Background Video Sizing */
-  .fullscreen-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 1; background-color: #000; }
-  .desktop-video { position: absolute; top: 50%; left: 50%; width: 100vw; height: calc(100vw * (1000 / 2560)); min-height: 100vh; min-width: calc(100vh * (2560 / 1000)); transform: translate(-50%, -50%); object-fit: cover; display: block; }
-  .mobile-video { display: none; }
-
-  @media (max-width: 767px) {
-    .desktop-video { display: none; }
-    .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
-  }
-
-  /* TRANSITION ENGINE LAYERS */
-  .page-transition-curtain {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #0d0d0d; z-index: 9999; pointer-events: none; opacity: 1; transition: opacity 0.4s ease-out;
-  }
-  .page-transition-curtain::before {
-    content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
-    z-index: 10000; background-size: 100% 3px, 6px 100%;
-  }
-  body.loaded .page-transition-curtain { opacity: 0; }
-  body.exiting .page-transition-curtain { opacity: 1; transition: opacity 0.25s ease-in; }
-
-  /* Top Navigation Bar Container */
-  .top-navbar {
-    position: fixed; top: 0; left: 0; width: 100%; padding: 0 40px; height: 70px;
-    display: flex; justify-content: flex-start; align-items: center;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
-    z-index: 10; opacity: 0;
-  }
-  body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
-
-  .dropdown { position: relative; display: inline-block; }
-  .dropdown-trigger { color: #fff; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; padding: 10px 15px; display: flex; align-items: center; gap: 8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); text-decoration: none; }
-  .dropdown-trigger::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s ease; }
-
-  .dropdown-menu {
-    position: absolute; top: 100%; left: 0; background-color: rgba(15, 15, 15, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; min-width: 200px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden;
-    transform: translateY(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); list-style: none;
-  }
-  .dropdown-menu a { color: rgba(255, 255, 255, 0.7); padding: 12px 20px; text-decoration: none; display: block; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.2s ease; text-align: left; }
-
-  .nested-dropdown { position: relative; }
-  .nested-dropdown > a::after { content: ' ▶'; font-size: 0.6rem; float: right; margin-top: 4px; }
-  .sub-menu {
-    position: absolute; top: 0; left: 100%; background-color: rgba(20, 20, 20, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; min-width: 180px;
-    opacity: 0; visibility: hidden; transform: translateX(10px); transition: all 0.25s ease; list-style: none;
-  }
-
-  .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-  .dropdown:hover .dropdown-trigger { color: #ddd; }
-  .dropdown:hover .dropdown-trigger::after { transform: rotate(180deg); }
-  .nested-dropdown:hover .sub-menu { opacity: 1; visibility: visible; transform: translateX(0); }
-  .dropdown-menu a:hover { background-color: rgba(255, 255, 255, 0.08); color: #fff; }
-  .sub-menu a:hover { background-color: rgba(255, 255, 255, 0.12); }
-
-  /* Content Display Layout */
-  .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
-  
-  @keyframes glitchIntro {
-    0% { opacity: 0; transform: translateY(15px) skewX(-4deg); filter: blur(2px); }
-    60% { opacity: 0.8; transform: translateY(-2px) skewX(2deg); filter: blur(0px); }
-    100% { opacity: 1; transform: translateY(0) skewX(0deg); }
-  }
-
-  h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); opacity: 0; }
-  body.loaded h1 { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.15s; }
-  
-  p.content-text { font-size: 1.3rem; font-weight: 300; max-width: 650px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.6; opacity: 0; }
-  body.loaded p.content-text { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.35s; }
-
-  @media (max-width: 768px) {
-    .top-navbar { padding: 0 20px; height: 60px; }
-    h1 { font-size: 2.2rem; }
-    p.content-text { font-size: 1.1rem; }
-    .nested-dropdown > a::after { content: ' ▼'; }
-    .sub-menu { position: relative; left: 0; top: 0; width: 100%; opacity: 1; visibility: visible; transform: none; display: none; background: rgba(0,0,0,0.2); }
-    .nested-dropdown:hover .sub-menu { display: block; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Studio Troman</title>
+  <!-- Link to your shared stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="page-transition-curtain"></div>
+  <!-- GLITCH CURTAIN BLOCK -->
+  <div class="page-transition-curtain"></div>
 
-<nav class="top-navbar">
-  <div class="dropdown">
-    <a href="index.html" class="transition-link dropdown-trigger">Home</a>
-    <ul class="dropdown-menu">
-      <li class="nested-dropdown">
-        <a href="index.html" class="transition-link">Games</a>
-        <ul class="sub-menu">
-          <li><a href="blighters.html" class="transition-link">Blighters</a></li>
-        </ul>
-      </li>
-      <li><a href="team.html" class="transition-link">Team</a></li>
-      <li><a href="about.html" class="transition-link">About</a></li>
-    </ul>
+  <nav class="top-navbar">
+    <!-- Interactive Mobile Hamburger Trigger Icon -->
+    <button class="menu-toggle" aria-label="Toggle Mobile Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <div class="dropdown">
+      <a href="index.html" class="transition-link dropdown-trigger">Menu</a>
+      <ul class="dropdown-menu">
+        <li class="mobile-only-home" style="display: none;"><a href="index.html" class="transition-link">Home</a></li>
+        <li class="nested-dropdown">
+          <a href="#" class="mobile-submenu-trigger">Games</a>
+          <ul class="sub-menu">
+            <li><a href="blighters.html" class="transition-link">Blighters</a></li>
+          </ul>
+        </li>
+        <li><a href="team.html" class="transition-link">Team</a></li>
+        <li><a href="about.html" class="transition-link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="fullscreen-bg">
+    <video class="desktop-video" autoplay loop muted playsinline>
+      <source src="webbacker_notext.webm" type="video/webm">
+    </video>
+    <video class="mobile-video" autoplay loop muted playsinline>
+      <source src="mobile_backer_clean.webm" type="video/webm">
+    </video>
   </div>
-</nav>
 
-<div class="fullscreen-bg">
-  <video class="desktop-video" autoplay loop muted playsinline>
-    <source src="webbacker_notext.webm" type="video/webm">
-  </video>
-  <video class="mobile-video" autoplay loop muted playsinline>
-    <source src="mobile_backer_clean.webm" type="video/webm">
-  </video>
-</div>
+  <div class="content-overlay">
+    <h1>About The Project</h1>
+    <p class="content-text">Studio Troman focuses on crafting stylized digital assets, deep atmosphere landscapes, and memorable interactive gameplay pipelines.</p>
+  </div>
 
-<div class="content-overlay">
-  <h1>About The Project</h1>
-  <p class="content-text">Studio Troman focuses on crafting stylized digital assets, deep atmosphere landscapes, and memorable interactive gameplay pipelines.</p>
-</div>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => { document.body.classList.add('loaded'); });
-  document.querySelectorAll('.transition-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const destination = this.getAttribute('href');
-      if (destination && destination !== '#' && !destination.includes(window.location.pathname)) {
-        e.preventDefault();
-        document.body.classList.add('exiting');
-        setTimeout(() => { window.location.href = destination; }, 250);
-      }
-    });
-  });
-</script>
-
+  <!-- Link to your shared script engine -->
+  <script src="script.js"></script>
 </body>
 </html>
