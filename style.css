@@ -48,7 +48,7 @@ body, html {
   .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
 }
 
-/* GLOBAL PAGE GLITCH TRANSITION CURTAIN */
+/* GLOBAL PAGE TRANSITION CURTAIN */
 .page-transition-curtain {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background-color: #0d0d0d; z-index: 9999; pointer-events: none;
@@ -136,17 +136,15 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 /* Main content layout overlay */
 .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
 
-/* INTRO TEXT GLITCH KEYFRAMES */
+/* CLEAN INTRO TEXT ENTRY ANIMATION (Glitch filters removed) */
 @keyframes glitchIntro {
-  0% { opacity: 0; transform: translateY(15px) skewX(4deg); filter: blur(2px); }
-  60% { opacity: 0.8; transform: translateY(-2px) skewX(-2deg); filter: blur(0px); }
-  80% { transform: skewX(8deg); }
-  100% { opacity: 1; transform: translateY(0) skewX(0deg); }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Updated Smaller Home Page Company Logo Setup */
+/* Much Smaller Home Page Company Logo Setup */
 .company-logo { 
-  max-width: 320px; /* Reduced to match your small size request */
+  max-width: 180px; /* Reduced further from 320px for a clean, minimalist profile layout */
   height: auto; 
   display: block; 
   filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5)); 
@@ -155,7 +153,7 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 }
 
 body.loaded .company-logo {
-  animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.15s;
 }
 
@@ -165,7 +163,7 @@ p.blurb {
 }
 
 body.loaded p.blurb {
-  animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: glitchIntro 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.3s;
 }
 
@@ -173,7 +171,7 @@ body.loaded p.blurb {
 @media (max-width: 768px) {
   .top-navbar { padding: 0 20px; height: 60px; justify-content: flex-end; }
   .menu-toggle { display: flex; }
-  .company-logo { max-width: 200px; } /* Clean scaled small size on smartphone layouts */
+  .company-logo { max-width: 130px; } /* Proportional scaling down for compact mobile views */
   p.blurb { font-size: 1.1rem; }
   .dropdown { position: static; width: auto; }
   .dropdown-trigger { display: none; }
@@ -205,15 +203,15 @@ body.loaded p.blurb {
 
 /* --- Blighters Page Explicit Visual Layout Targets --- */
 .logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; opacity: 0; }
-body.loaded .logo-container { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
+body.loaded .logo-container { animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
 .logo-video { width: 500px; height: auto; display: block; background: transparent; }
 
 .image-stack { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 25px; }
 .stacked-png-1 { max-width: 320px; height: auto; display: block; opacity: 0; }
-body.loaded .stacked-png-1 { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+body.loaded .stacked-png-1 { animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
 
 .wishlist-link { display: inline-block; cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease; text-decoration: none; opacity: 0; }
-body.loaded .wishlist-link { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; }
+body.loaded .wishlist-link { animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; }
 .wishlist-link:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
 .stacked-png-2 { max-width: 320px; height: auto; display: block; }
 
@@ -224,10 +222,10 @@ body.loaded .wishlist-link { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0
 
 /* --- Sub-page Headers & Content Layouts --- */
 h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); opacity: 0; }
-body.loaded h1 { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.15s; }
+body.loaded h1 { animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.15s; }
 
 p.content-text { font-size: 1.3rem; font-weight: 300; max-width: 650px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.6; opacity: 0; }
-body.loaded p.content-text { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.35s; }
+body.loaded p.content-text { animation: glitchIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.35s; }
 
 @media (max-width: 768px) {
   h1 { font-size: 2.2rem; }
