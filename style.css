@@ -14,7 +14,7 @@ body, html {
   overflow-x: hidden; 
 }
 
-/* Shared Video Background Engine */
+/* Shared Background Engine - Static Minimal Variant */
 .fullscreen-bg { 
   position: fixed; 
   top: 0; 
@@ -23,39 +23,21 @@ body, html {
   height: 100vh; 
   overflow: hidden; 
   z-index: 1; 
-  background-color: #000; 
+  background-color: #000; /* Clean solid fallback black palette */
 }
 
+/* Completely disabled layout render pipelines for background looping clips */
 .desktop-video { 
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  width: 100vw; 
-  height: calc(100vw * (1000 / 2560)); 
-  min-height: 100vh; 
-  min-width: calc(100vh * (2560 / 1000)); 
-  transform: translate(-50%, -50%); 
-  object-fit: cover; 
-  display: block; 
+  display: none !important; 
 }
 
 .mobile-video { 
-  display: none; 
+  display: none !important; 
 }
 
 @media (max-width: 767px) {
-  .desktop-video { display: none; }
-  /* Ensures the mobile video background stretches fully to cover the layout view port portrait dimension scales */
-  .mobile-video { 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    width: 100%; 
-    height: 100%; 
-    transform: translate(-50%, -50%); 
-    object-fit: cover; 
-    display: block; 
-  }
+  .desktop-video { display: none !important; }
+  .mobile-video { display: none !important; }
 }
 
 /* GLOBAL PAGE TRANSITION CURTAIN */
