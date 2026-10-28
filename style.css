@@ -40,7 +40,7 @@ body, html {
   .mobile-video { display: none !important; }
 }
 
-/* GLOBAL PAGE TRANSITION CURTAIN (Glitch lines and tints removed) */
+/* GLOBAL PAGE TRANSITION CURTAIN */
 .page-transition-curtain {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background-color: #0d0d0d; z-index: 9999; pointer-events: none;
@@ -122,7 +122,7 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 /* Main content layout overlay */
 .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
 
-/* REPLACED: NEW CLEAN FADE TRANSLATION INTERACTION RUNNERS */
+/* CLEAN INTRO TEXT ENTRY ANIMATION */
 @keyframes fadeIntro {
   0% { opacity: 0; transform: translateY(10px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -201,12 +201,31 @@ body.loaded .wishlist-link { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
 .wishlist-link:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
 .stacked-png-2 { max-width: 320px; height: auto; display: block; }
 
-/* 🎬 REVERTED BLIGHTERS OVERLAYS (Default sharp brightness without moving or blurring clips) */
-#blighters-body .desktop-video,
+/* 🎬 STABLE BLIGHTERS OVERLAYS (Restores centered coordinates with zero distortions or blur loops) */
+#blighters-body .desktop-video {
+  display: block !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: calc(100vw * (1000 / 2560));
+  min-height: 100vh;
+  min-width: calc(100vh * (2560 / 1000));
+  transform: translate(-50%, -50%) scale(1) !important;
+  object-fit: cover;
+  filter: none !important;
+}
+
 #blighters-body .mobile-video {
-  display: block !important; 
-  filter: none !important; 
-  transform: translate(-50%, -50%) scale(1) !important; 
+  display: block !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(1) !important;
+  object-fit: cover;
+  filter: none !important;
 }
 
 @media (max-width: 768px) {
