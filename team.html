@@ -31,7 +31,12 @@
     align-items: center;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
     z-index: 10;
-    animation: fadeInSmooth 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+  /* Nav fades in smoothly once script activates it */
+  body.loaded .top-navbar {
+    opacity: 1;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Level 1 Dropdown Architecture */
@@ -86,7 +91,7 @@
   /* Content Display Layout */
   .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
   
-  /* TRANSITION ENGINE KEYFRAMES */
+  /* HARDWARE ACCELERATED TRANSITION TIMING */
   @keyframes fadeInSmooth {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -95,15 +100,20 @@
   h1 { 
     font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); 
     opacity: 0;
+  }
+  /* Animation fires smoothly only when class is injected by script */
+  body.loaded h1 {
     animation: fadeInSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
   }
   
   p.content-text { 
     font-size: 1.3rem; font-weight: 300; max-width: 650px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.6; 
     opacity: 0;
+  }
+  body.loaded p.content-text {
     animation: fadeInSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.4s;
+    animation-delay: 0.3s;
   }
 
   @media (max-width: 768px) {
@@ -147,6 +157,13 @@
   <h1>Meet Our Team</h1>
   <p class="content-text">We are a dedicated group of independent developers, artists, and creators focusing on rich worlds and polished visual design mechanics.</p>
 </div>
+
+<script>
+  // Instantly forces class loading hook to handle DOM state sync and fix transition stutter
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+  });
+</script>
 
 </body>
 </html>
