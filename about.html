@@ -31,7 +31,11 @@
     align-items: center;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
     z-index: 10;
-    animation: fadeInSmooth 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+  body.loaded .top-navbar {
+    opacity: 1;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Level 1 Dropdown Architecture */
@@ -95,15 +99,19 @@
   h1 { 
     font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); 
     opacity: 0;
+  }
+  body.loaded h1 {
     animation: fadeInSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
   }
   
   p.content-text { 
     font-size: 1.3rem; font-weight: 300; max-width: 650px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.6; 
     opacity: 0;
+  }
+  body.loaded p.content-text {
     animation: fadeInSmooth 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.4s;
+    animation-delay: 0.3s;
   }
 
   @media (max-width: 768px) {
@@ -147,6 +155,12 @@
   <h1>About The Project</h1>
   <p class="content-text">Studio Troman focuses on crafting stylized digital assets, deep atmosphere landscapes, and memorable interactive gameplay pipelines.</p>
 </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+  });
+</script>
 
 </body>
 </html>
