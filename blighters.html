@@ -4,414 +4,106 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blighters - Coming Soon</title>
-
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body, html {
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background-color: #000;
-    color: #fff;
-    overflow-x: hidden;
-  }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html { width: 100%; height: 100%; min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
+  
   /* Background Video Container */
-  .fullscreen-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 1;
-    background-color: #000;
-  }
-
-  /* Simple dark overlay */
-  .fullscreen-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .desktop-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: calc(100vw * (1000 / 2560));
-    min-height: 100vh;
-    min-width: calc(100vh * (2560 / 1000));
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-    display: block;
-  }
-
-  .mobile-video {
-    display: none;
-  }
+  .fullscreen-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 1; background-color: #000; }
+  .desktop-video { position: absolute; top: 50%; left: 50%; width: 100vw; height: calc(100vw * (1000 / 2560)); min-height: 100vh; min-width: calc(100vh * (2560 / 1000)); transform: translate(-50%, -50%); object-fit: cover; display: block; }
+  .mobile-video { display: none; }
 
   @media (max-width: 767px) {
-    .desktop-video {
-      display: none;
-    }
-
-    .mobile-video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      display: block;
-    }
+    .desktop-video { display: none; }
+    .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
   }
 
   /* TRANSITION ENGINE STRUCTURAL BLOCKS */
   .page-transition-curtain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #0d0d0d;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.4s ease-out;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #0d0d0d; z-index: 9999; pointer-events: none; opacity: 1; transition: opacity 0.4s ease-out;
   }
-
   .page-transition-curtain::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background:
-      linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.3) 50%),
-      linear-gradient(
-        90deg,
-        rgba(255,0,0,0.05),
-        rgba(0,255,0,0.02),
-        rgba(0,0,255,0.05)
-      );
-    background-size: 100% 3px, 6px 100%;
-    z-index: 10000;
+    content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+    z-index: 10000; background-size: 100% 3px, 6px 100%;
   }
-
-  body.loaded .page-transition-curtain {
-    opacity: 0;
-  }
-
-  body.exiting .page-transition-curtain {
-    opacity: 1;
-    transition: opacity 0.25s ease-in;
-  }
+  body.loaded .page-transition-curtain { opacity: 0; }
+  body.exiting .page-transition-curtain { opacity: 1; transition: opacity 0.25s ease-in; }
 
   /* Top Navigation Bar Container */
   .top-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0 40px;
-    height: 70px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.7) 0%,
-      rgba(0,0,0,0) 100%
-    );
-    z-index: 10;
-    opacity: 0;
+    position: fixed; top: 0; left: 0; width: 100%; padding: 0 40px; height: 70px;
+    display: flex; justify-content: flex-start; align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    z-index: 10; opacity: 0;
   }
+  body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
-  body.loaded .top-navbar {
-    opacity: 1;
-    transition: opacity 0.8s ease;
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-trigger {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-    text-decoration: none;
-  }
-
-  .dropdown-trigger::after {
-    content: '▼';
-    font-size: 0.7rem;
-    transition: transform 0.3s ease;
-  }
+  .dropdown { position: relative; display: inline-block; }
+  .dropdown-trigger { color: #fff; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; padding: 10px 15px; display: flex; align-items: center; gap: 8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); text-decoration: none; }
+  .dropdown-trigger::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s ease; }
 
   .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgba(15,15,15,0.95);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 6px;
-    min-width: 200px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    list-style: none;
+    position: absolute; top: 100%; left: 0; background-color: rgba(15, 15, 15, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); opacity: 0; visibility: hidden;
+    transform: translateY(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); list-style: none;
   }
+  .dropdown-menu a { color: rgba(255, 255, 255, 0.7); padding: 12px 20px; text-decoration: none; display: block; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.2s ease; text-align: left; }
 
-  .dropdown-menu a {
-    color: rgba(255,255,255,0.7);
-    padding: 12px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-    text-align: left;
-  }
-
-  .nested-dropdown {
-    position: relative;
-  }
-
-  .nested-dropdown > a::after {
-    content: ' ▶';
-    font-size: 0.6rem;
-    float: right;
-    margin-top: 4px;
-  }
-
+  .nested-dropdown { position: relative; }
+  .nested-dropdown > a::after { content: ' ▶'; font-size: 0.6rem; float: right; margin-top: 4px; }
   .sub-menu {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    background-color: rgba(20,20,20,0.98);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 6px;
-    min-width: 180px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(10px);
-    transition: all 0.25s ease;
-    list-style: none;
+    position: absolute; top: 0; left: 100%; background-color: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 6px; min-width: 180px;
+    opacity: 0; visibility: hidden; transform: translateX(10px); transition: all 0.25s ease; list-style: none;
   }
 
-  .dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+  .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .dropdown:hover .dropdown-trigger { color: #ddd; }
+  .dropdown:hover .dropdown-trigger::after { transform: rotate(180deg); }
+  .nested-dropdown:hover .sub-menu { opacity: 1; visibility: visible; transform: translateX(0); }
+  .dropdown-menu a:hover { background-color: rgba(255, 255, 255, 0.08); color: #fff; }
+  .sub-menu a:hover { background-color: rgba(255, 255, 255, 0.12); }
 
-  .dropdown:hover .dropdown-trigger {
-    color: #ddd;
-  }
-
-  .dropdown:hover .dropdown-trigger::after {
-    transform: rotate(180deg);
-  }
-
-  .nested-dropdown:hover .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-  }
-
-  .dropdown-menu a:hover {
-    background-color: rgba(255,255,255,0.08);
-    color: #fff;
-  }
-
-  .sub-menu a:hover {
-    background-color: rgba(255,255,255,0.12);
-  }
-
-  /* Content */
-  .content-overlay {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 90px 20px 40px 20px;
-    z-index: 3;
-    overflow-y: auto;
-  }
-
+  /* Main content layout overlay */
+  .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
+  
   @keyframes glitchIntro {
-    0% {
-      opacity: 0;
-      transform: translateY(15px) skewX(-4deg);
-      filter: blur(2px);
-    }
-    60% {
-      opacity: 0.8;
-      transform: translateY(-2px) skewX(2deg);
-      filter: blur(0px);
-    }
-    80% {
-      transform: skewX(-6deg);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) skewX(0deg);
-    }
+    0% { opacity: 0; transform: translateY(15px) skewX(-4deg); filter: blur(2px); }
+    60% { opacity: 0.8; transform: translateY(-2px) skewX(2deg); filter: blur(0px); }
+    80% { transform: skewX(-6deg); }
+    100% { opacity: 1; transform: translateY(0) skewX(0deg); }
   }
 
-  .logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-  }
+  .logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; opacity: 0; }
+  body.loaded .logo-container { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
+  .logo-video { width: 500px; height: auto; display: block; background: transparent; }
 
-  body.loaded .logo-container {
-    animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.1s;
-  }
+  .image-stack { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 25px; }
+  
+  .stacked-png-1 { max-width: 320px; height: auto; display: block; opacity: 0; }
+  body.loaded .stacked-png-1 { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+  
+  .wishlist-link { display: inline-block; cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease; text-decoration: none; opacity: 0; }
+  body.loaded .wishlist-link { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; }
+  .wishlist-link:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+  .stacked-png-2 { max-width: 320px; height: auto; display: block; }
 
-  .logo-video {
-    width: 500px;
-    height: auto;
-    display: block;
-    background: transparent;
-  }
-
-  .image-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
-  }
-
-  .stacked-png-1 {
-    max-width: 320px;
-    height: auto;
-    display: block;
-    opacity: 0;
-  }
-
-  body.loaded .stacked-png-1 {
-    animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.25s;
-  }
-
-  .wishlist-link {
-    display: inline-block;
-    cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
-    text-decoration: none;
-    opacity: 0;
-  }
-
-  body.loaded .wishlist-link {
-    animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.4s;
-  }
-
-  .wishlist-link:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
-  }
-
-  .stacked-png-2 {
-    max-width: 320px;
-    height: auto;
-    display: block;
-  }
-
-  .wishlist-heading {
-    font-size: 2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-    opacity: 0;
-  }
-
-  body.loaded .wishlist-heading {
-    animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.5s;
-  }
-
-  p.blurb {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    font-weight: 300;
-    max-width: 600px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-    line-height: 1.5;
-    letter-spacing: 0.5px;
-    opacity: 0;
-  }
-
-  body.loaded p.blurb {
-    animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: 0.55s;
-  }
+  p.blurb { font-size: 1.4rem; margin-bottom: 20px; font-weight: 300; max-width: 600px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.5; letter-spacing: 0.5px; opacity: 0; }
+  body.loaded p.blurb { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.55s; }
 
   @media (max-width: 768px) {
-    .top-navbar {
-      padding: 0 20px;
-      height: 60px;
-    }
-
-    .logo-video {
-      width: 340px;
-    }
-
-    .stacked-png-1,
-    .stacked-png-2 {
-      max-width: 220px;
-    }
-
-    .wishlist-heading {
-      font-size: 1.5rem;
-    }
-
-    .blurb {
-      font-size: 1.1rem;
-    }
+    .top-navbar { padding: 0 20px; height: 60px; }
+    p.blurb { font-size: 1.1rem; }
+    .logo-video { width: 340px; }
+    .stacked-png-1, .stacked-png-2 { max-width: 220px; }
+    .nested-dropdown > a::after { content: ' ▼'; }
+    .sub-menu { position: relative; left: 0; top: 0; width: 100%; opacity: 1; visibility: visible; transform: none; display: none; background: rgba(0,0,0,0.2); }
+    .nested-dropdown:hover .sub-menu { display: block; }
   }
-
 </style>
 </head>
-
 <body>
 
 <div class="page-transition-curtain"></div>
@@ -419,7 +111,6 @@
 <nav class="top-navbar">
   <div class="dropdown">
     <a href="index.html" class="transition-link dropdown-trigger">Home</a>
-
     <ul class="dropdown-menu">
       <li class="nested-dropdown">
         <a href="index.html" class="transition-link">Games</a>
@@ -437,14 +128,12 @@
   <video class="desktop-video" autoplay loop muted playsinline>
     <source src="webbacker_notext.webm" type="video/webm">
   </video>
-
   <video class="mobile-video" autoplay loop muted playsinline>
     <source src="mobile_backer_clean.webm" type="video/webm">
   </video>
 </div>
 
 <div class="content-overlay">
-
   <div class="logo-container">
     <video class="logo-video" autoplay loop muted playsinline>
       <source src="blighterlogo.webm" type="video/webm">
@@ -453,42 +142,27 @@
 
   <div class="image-stack">
     <img src="WebpageLogo.png" alt="Blighters Logo Graphic" class="stacked-png-1">
-
-    <a href="https://steampowered.com" target="_blank" rel="noopener noreferrer" class="wishlist-link">
+    <a href="https://steampowered.com" target="_blank" class="wishlist-link">
       <img src="wishlist.png" alt="Wishlist Now on Steam" class="stacked-png-2">
     </a>
   </div>
 
-  <h2 class="wishlist-heading">WISHLIST NOW</h2>
-
-  <p class="blurb">
-    We are building a brand new digital experience. Follow our journey as we get closer to launch and get ready for a completely fresh perspective.
-  </p>
-
+  <p class="blurb">We are building a brand new digital experience. Follow our journey as we get closer to launch and get ready for a completely fresh perspective.</p>
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add('loaded');
-});
-
-document.querySelectorAll('.transition-link').forEach(link => {
-  link.addEventListener('click', function(e) {
-    const destination = this.getAttribute('href');
-
-    if (destination &&
-        destination !== '#' &&
-        !destination.includes(window.location.pathname)) {
-
-      e.preventDefault();
-      document.body.classList.add('exiting');
-
-      setTimeout(() => {
-        window.location.href = destination;
-      }, 250);
-    }
+  window.addEventListener('DOMContentLoaded', () => { document.body.classList.add('loaded'); });
+  document.querySelectorAll('.transition-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const destination = this.getAttribute('href');
+      if (destination && destination !== '#' && !destination.includes(window.location.pathname)) {
+        e.preventDefault();
+        document.body.classList.add('exiting');
+        setTimeout(() => { window.location.href = destination; }, 250);
+      }
+    });
   });
-});
 </script>
 
-</body
+</body>
+</html>
