@@ -144,9 +144,14 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   100% { opacity: 1; transform: translateY(0) skewX(0deg); }
 }
 
+/* Updated Smaller Home Page Company Logo Setup */
 .company-logo { 
-  max-width: 450px; height: auto; display: block; 
-  filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5)); margin-bottom: 25px; opacity: 0;
+  max-width: 320px; /* Reduced to match your small size request */
+  height: auto; 
+  display: block; 
+  filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5)); 
+  margin-bottom: 25px; 
+  opacity: 0;
 }
 
 body.loaded .company-logo {
@@ -164,11 +169,11 @@ body.loaded p.blurb {
   animation-delay: 0.3s;
 }
 
-/* Mobile Responsive Overlay Adjustments */
+/* Mobile Responsive Navigation Overlay Adjustments */
 @media (max-width: 768px) {
   .top-navbar { padding: 0 20px; height: 60px; justify-content: flex-end; }
   .menu-toggle { display: flex; }
-  .company-logo { max-width: 280px; }
+  .company-logo { max-width: 200px; } /* Clean scaled small size on smartphone layouts */
   p.blurb { font-size: 1.1rem; }
   .dropdown { position: static; width: auto; }
   .dropdown-trigger { display: none; }
@@ -217,7 +222,7 @@ body.loaded .wishlist-link { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0
   .stacked-png-1, .stacked-png-2 { max-width: 220px; }
 }
 
-
+/* --- Sub-page Headers & Content Layouts --- */
 h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); opacity: 0; }
 body.loaded h1 { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.15s; }
 
@@ -228,4 +233,3 @@ body.loaded p.content-text { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0
   h1 { font-size: 2.2rem; }
   p.content-text { font-size: 1.1rem; }
 }
-
