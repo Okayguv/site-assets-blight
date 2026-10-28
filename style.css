@@ -190,11 +190,28 @@ body.loaded p.blurb {
 /* --- Blighters Page Explicit Visual Layout Targets --- */
 .logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; opacity: 0; }
 body.loaded .logo-container { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.1s; }
-.logo-video { width: 500px; height: auto; display: block; background: transparent; }
+
+/* 🚀 Logo Video Resize: Increased width from 500px to 700px for desktop viewports */
+.logo-video { 
+  width: 700px; 
+  height: auto; 
+  display: block; 
+  background: transparent; 
+}
 
 .image-stack { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 25px; }
 .stacked-png-1 { max-width: 320px; height: auto; display: block; opacity: 0; }
 body.loaded .stacked-png-1 { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
+
+@media (max-width: 768px) {
+  /* 📱 Mobile Logo Video Resize: Increased width from 340px to 450px for mobile screens */
+  .logo-video { 
+    width: 450px; 
+    max-width: 100%; /* Safety guard so it never overflows narrow screens */
+  }
+  .stacked-png-1 { max-width: 220px; }
+}
+
 
 /* --- Interactive Link Button Overlays --- */
 .wishlist-link { 
