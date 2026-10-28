@@ -8,37 +8,14 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body, html { width: 100%; height: 100%; min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; background-color: #000; color: #fff; }
   
-  /* Fixed full-viewport setup for the video frame layout */
+  /* Video Background Sizing Frame */
   .fullscreen-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 1; background-color: #000; }
-  
-  /* Desktop 2560x1000 Sizing: Spans width seamlessly and centers vertically without distortion */
-  .desktop-video { 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    width: 100vw; 
-    height: calc(100vw * (1000 / 2560)); 
-    min-height: 100vh;
-    min-width: calc(100vh * (2560 / 1000));
-    transform: translate(-50%, -50%); 
-    object-fit: cover; 
-    display: block;
-  }
-
+  .desktop-video { position: absolute; top: 50%; left: 50%; width: 100vw; height: calc(100vw * (1000 / 2560)); min-height: 100vh; min-width: calc(100vh * (2560 / 1000)); transform: translate(-50%, -50%); object-fit: cover; display: block; }
   .mobile-video { display: none; }
 
   @media (max-width: 767px) {
     .desktop-video { display: none; }
-    .mobile-video { 
-      position: absolute; 
-      top: 50%; 
-      left: 50%; 
-      width: 100%; 
-      height: 100%; 
-      transform: translate(-50%, -50%); 
-      object-fit: cover; 
-      display: block;
-    }
+    .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
   }
 
   /* Top Navigation Bar Container */
@@ -56,28 +33,12 @@
     z-index: 10;
   }
 
-  /* Dropdown Menu Architecture */
+  /* Level 1 Dropdown Architecture */
   .dropdown { position: relative; display: inline-block; }
-
-  .dropdown-trigger {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.3s ease;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-  }
-
+  .dropdown-trigger { color: #fff; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; padding: 10px 15px; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); }
   .dropdown-trigger::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s ease; }
 
+  /* Level 2 Submenu Panel list */
   .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -92,26 +53,36 @@
     transform: translateY(10px);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     list-style: none;
-    overflow: hidden;
+  }
+  .dropdown-menu a { color: rgba(255, 255, 255, 0.7); padding: 12px 20px; text-decoration: none; display: block; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.2s ease; text-align: left; }
+
+  /* Level 3 Cascading Flyout Menu Rules */
+  .nested-dropdown { position: relative; }
+  .nested-dropdown > a::after { content: ' ▶'; font-size: 0.6rem; float: right; margin-top: 4px; }
+  .sub-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.25s ease;
+    list-style: none;
   }
 
-  .dropdown-menu a {
-    color: rgba(255, 255, 255, 0.7);
-    padding: 12px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-    text-align: left;
-  }
-
+  /* Structural Hover Interaction Definitions */
   .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
   .dropdown:hover .dropdown-trigger { color: #ddd; }
   .dropdown:hover .dropdown-trigger::after { transform: rotate(180deg); }
-  .dropdown-menu a:hover { background-color: rgba(255, 255, 255, 0.08); color: #fff; padding-left: 25px; }
+  .nested-dropdown:hover .sub-menu { opacity: 1; visibility: visible; transform: translateX(0); }
+  .dropdown-menu a:hover { background-color: rgba(255, 255, 255, 0.08); color: #fff; }
+  .sub-menu a:hover { background-color: rgba(255, 255, 255, 0.12); }
 
-  /* Main content layout overlay positioned over the background */
+  /* Main content layout overlay positioned cleanly over the background */
   .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
   
   .logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; }
@@ -130,24 +101,29 @@
     p.blurb { font-size: 1.1rem; }
     .logo-video { width: 340px; }
     .stacked-png { max-width: 220px; }
+    .nested-dropdown > a::after { content: ' ▼'; }
+    .sub-menu { position: relative; left: 0; top: 0; width: 100%; opacity: 1; visibility: visible; transform: none; display: none; background: rgba(0,0,0,0.2); }
+    .nested-dropdown:hover .sub-menu { display: block; }
   }
 </style>
 </head>
 <body>
 
-<!-- TOP NAVIGATION HEADER BAR -->
 <nav class="top-navbar">
   <div class="dropdown">
-    <button class="dropdown-trigger">Games</button>
+    <button class="dropdown-trigger">Home</button>
     <ul class="dropdown-menu">
-      <!-- Direct path extensions that map flawlessly to your GitHub folder files -->
-      <li><a href="index.html">Blighters</a></li>
+      <li class="nested-dropdown">
+        <a href="index.html">Games</a>
+        <ul class="sub-menu">
+          <li><a href="blighters.html">Blighters</a></li>
+        </ul>
+      </li>
       <li><a href="team.html">Team</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
   </div>
 </nav>
-
 
 <div class="fullscreen-bg">
   <video class="desktop-video" autoplay loop muted playsinline>
@@ -167,7 +143,7 @@
 
   <div class="image-stack">
     <img src="WebpageLogo.png" alt="Blighters Logo Graphic" class="stacked-png">
-    <!-- Replace the href below with your live Steam store link -->
+    <!-- Replace the target store link inside the href parameter below -->
     <a href="https://steampowered.com" target="_blank" class="wishlist-link">
       <img src="wishlist.png" alt="Wishlist Now on Steam" class="stacked-png">
     </a>
@@ -178,4 +154,3 @@
 
 </body>
 </html>
-
