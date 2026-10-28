@@ -196,10 +196,33 @@ body.loaded .logo-container { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.
 .stacked-png-1 { max-width: 320px; height: auto; display: block; opacity: 0; }
 body.loaded .stacked-png-1 { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.25s; }
 
-.wishlist-link { display: inline-block; cursor: pointer; transition: transform 0.2s ease, filter 0.2s ease; text-decoration: none; opacity: 0; }
-body.loaded .wishlist-link { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; }
-.wishlist-link:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
-.stacked-png-2 { max-width: 320px; height: auto; display: block; }
+/* --- Interactive Link Button Overlays --- */
+.wishlist-link { 
+  display: inline-block; 
+  cursor: pointer; 
+  text-decoration: none; 
+  opacity: 0; 
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s cubic-bezier(0.16, 1, 0.3, 1); /* Ultra-smooth response curve */
+}
+
+/* Fades the link in when the page finishes loading */
+body.loaded .wishlist-link { 
+  animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+  animation-delay: 0.4s; 
+}
+
+/* 🚀 Hover State: Lift up and add an ambient dark/light glow */
+.wishlist-link:hover { 
+  transform: translateY(-4px); /* Smoothly raises the element up by 4 pixels */
+  filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.25)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8)); /* Creates a dual drop-shadow depth layer */
+}
+
+/* 🖱️ Click/Active State: Tactile snap down */
+.wishlist-link:active {
+  transform: translateY(-1px); /* Drops down slightly when clicked to mimic a real physics push button */
+  filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.15)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+}
+
 
 /* 🎬 STABLE BLIGHTERS OVERLAYS (Perfect native desktop canvas centering) */
 #blighters-body .desktop-video {
