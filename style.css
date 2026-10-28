@@ -201,32 +201,44 @@ body.loaded .wishlist-link { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
 .wishlist-link:hover { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
 .stacked-png-2 { max-width: 320px; height: auto; display: block; }
 
-/* 🎬 STABLE BLIGHTERS OVERLAYS (Restores centered coordinates with zero distortions or blur loops) */
+/* 🎬 STABLE BLIGHTERS OVERLAYS (Perfect native desktop canvas centering) */
 #blighters-body .desktop-video {
-  display: block !important;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: calc(100vw * (1000 / 2560));
-  min-height: 100vh;
-  min-width: calc(100vh * (2560 / 1000));
-  transform: translate(-50%, -50%) scale(1) !important;
-  object-fit: cover;
-  filter: none !important;
-}
-
-#blighters-body .mobile-video {
   display: block !important;
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
   height: 100%;
-  transform: translate(-50%, -50%) scale(1) !important;
-  object-fit: cover;
+  transform: translate(-50%, -50%) !important;
+  object-fit: cover; /* Natively centers and spans the file perfectly with zero manual math distortion */
   filter: none !important;
 }
+
+#blighters-body .mobile-video {
+  display: none !important; /* Locks out mobile rendering loop completely on computer displays */
+}
+
+@media (max-width: 768px) {
+  .logo-video { width: 340px; }
+  .stacked-png-1, .stacked-png-2 { max-width: 220px; }
+  
+  /* --- Mobile Layout Background Switch Engine --- */
+  #blighters-body .desktop-video { 
+    display: none !important; 
+  }
+  #blighters-body .mobile-video { 
+    display: block !important; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) !important;
+    object-fit: cover;
+    filter: none !important;
+  }
+}
+
 
 @media (max-width: 768px) {
   .logo-video { width: 340px; }
