@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Troman - Home</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html { width: 100%; height: 100%; min-height: 100vh; font-family: 'Segoe UI', system-ui, sans-serif; background-color: #000; color: #fff; }
+  
+  /* Video Background Sizing Core */
+  .fullscreen-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 1; background-color: #000; }
+  .desktop-video { position: absolute; top: 50%; left: 50%; width: 100vw; height: calc(100vw * (1000 / 2560)); min-height: 100vh; min-width: calc(100vh * (2560 / 1000)); transform: translate(-50%, -50%); object-fit: cover; display: block; }
+  .mobile-video { display: none; }
+
+  @media (max-width: 767px) {
+    .desktop-video { display: none; }
+    .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
+  }
+
+  /* Top Navigation Bar Container */
+  .top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    z-index: 10;
+  }
+
+  /* Level 1: Master Dropdown (Home Trigger) */
+  .dropdown { position: relative; display: inline-block; }
+  
+  .dropdown-trigger {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+  }
+  .dropdown-trigger::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s ease; }
+
+  /* Level 2: Main Menu List (Games, Team, About) */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(15, 15, 15, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    list-style: none;
+  }
+
+  .dropdown-menu a {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    text-align: left;
+  }
+
+  /* Level 3: Nested Flyout Menu (Games -> Blighters subcategory) */
+  .nested-dropdown { position: relative; }
+  .nested-dropdown > a::after { content: ' ▶'; font-size: 0.6rem; float: right; margin-top: 4px; }
+  
+  .sub-menu {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Pushes the menu box cleanly out to the right side */
+    background-color: rgba(20, 20, 20, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.25s ease;
+    list-style: none;
+  }
+
+  /* Interactive Hover Rules for Multi-Level Lists */
+  .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .dropdown:hover .dropdown-trigger { color: #ddd; }
+  .dropdown:hover .dropdown-trigger::after { transform: rotate(180deg); }
+  
+  /* Triggers the secondary flyout on Games hover */
+  .nested-dropdown:hover .sub-menu { opacity: 1; visibility: visible; transform: translateX(0); }
+  
+  .dropdown-menu a:hover { background-color: rgba(255, 255, 255, 0.08); color: #fff; }
+  .sub-menu a:hover { background-color: rgba(255, 255, 255, 0.12); }
+
+  /* Content Overlay Layout */
+  .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
+  h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
+  p.blurb { font-size: 1.4rem; font-weight: 300; max-width: 600px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .top-navbar { padding: 0 20px; height: 60px; }
+    h1 { font-size: 2.2rem; }
+    p.blurb { font-size: 1.1rem; }
+    /* Mobile usability tweak: stacks nested dropdown elements inside the main frame container */
+    .nested-dropdown > a::after { content: ' ▼'; }
+    .sub-menu { position: relative; left: 0; top: 0; width: 100%; opacity: 1; visibility: visible; transform: none; display: none; background: rgba(0,0,0,0.2); }
+    .nested-dropdown:hover .sub-menu { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NESTED NAVIGATION NAVBAR LAYER -->
+<nav class="top-navbar">
+  <div class="dropdown">
+    <button class="dropdown-trigger">Home</button>
+    <ul class="dropdown-menu">
+      <!-- LEVEL 2 ITEMS -->
+      <li class="nested-dropdown">
+        <a href="#">Games</a>
+        <!-- LEVEL 3 SUB-CATEGORY ITEMS -->
+        <ul class="sub-menu">
+          <li><a href="blighters.html">Blighters</a></li>
+        </ul>
+      </li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="fullscreen-bg">
+  <video class="desktop-video" autoplay loop muted playsinline>
+    <source src="webbacker_notext.webm" type="video/webm">
+  </video>
+  <video class="mobile-video" autoplay loop muted playsinline>
+    <source src="mobile_backer_clean.webm" type="video/webm">
+  </video>
+</div>
+
+<div class="content-overlay">
+  <!-- Customize your core studio brand name header and text lines right here -->
+  <h1>Studio Troman</h1>
+  <p class="blurb">Welcome to our development hub. Hover over the menu to explore our active game projects, meet our engineering team, or learn about our mission pipeline.</p>
+</div>
+
+</body>
+</html>
