@@ -13,6 +13,17 @@
   .desktop-video { position: absolute; top: 50%; left: 50%; width: 100vw; height: calc(100vw * (1000 / 2560)); min-height: 100vh; min-width: calc(100vh * (2560 / 1000)); transform: translate(-50%, -50%); object-fit: cover; display: block; }
   .mobile-video { display: none; }
 
+   .hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+
   @media (max-width: 767px) {
     .desktop-video { display: none; }
     .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
@@ -105,11 +116,52 @@
 
   @media (max-width: 768px) {
     .top-navbar { padding: 0 20px; height: 60px; }
+
+    .hamburger {
+      display: block;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      z-index: 20;
+    }
+
+    .dropdown.active {
+      display: block;
+    }
+
+    .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      position: relative;
+      display: block;
+    }
+
     .company-logo { max-width: 280px; }
     p.blurb { font-size: 1.1rem; }
+
     .nested-dropdown > a::after { content: ' ▼'; }
-    .sub-menu { position: relative; left: 0; top: 0; width: 100%; opacity: 1; visibility: visible; transform: none; display: none; background: rgba(0,0,0,0.2); }
-    .nested-dropdown:hover .sub-menu { display: block; }
+
+    .sub-menu {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .nested-dropdown:hover .sub-menu {
+      display: block;
+    }
+  }
   }
 </style>
 </head>
@@ -119,6 +171,7 @@
 <div class="page-transition-curtain"></div>
 
 <nav class="top-navbar">
+  <button class="hamburger" aria-label="Menu">☰</button>
   <div class="dropdown">
     <a href="index.html" class="transition-link dropdown-trigger">Home</a>
     <ul class="dropdown-menu">
@@ -166,6 +219,13 @@
         }, 250); // Exact window sync gap running alongside CSS out-fade transition
       }
     });
+  });
+
+  const hamburger = document.querySelector('.hamburger');
+  const dropdown = document.querySelector('.dropdown');
+
+  hamburger.addEventListener('click', () => {
+    dropdown.classList.toggle('active');
   });
 </script>
 
