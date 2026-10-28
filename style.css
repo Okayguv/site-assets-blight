@@ -217,3 +217,15 @@ body.loaded .wishlist-link { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0
   .stacked-png-1, .stacked-png-2 { max-width: 220px; }
 }
 
+
+h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); opacity: 0; }
+body.loaded h1 { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.15s; }
+
+p.content-text { font-size: 1.3rem; font-weight: 300; max-width: 650px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); line-height: 1.6; opacity: 0; }
+body.loaded p.content-text { animation: glitchIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.35s; }
+
+@media (max-width: 768px) {
+  h1 { font-size: 2.2rem; }
+  p.content-text { font-size: 1.1rem; }
+}
+
