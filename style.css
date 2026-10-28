@@ -45,7 +45,17 @@ body, html {
 
 @media (max-width: 767px) {
   .desktop-video { display: none; }
-  .mobile-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); object-fit: cover; display: block; }
+  /* Ensures the mobile video background stretches fully to cover the layout view port portrait dimension scales */
+  .mobile-video { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    width: 100%; 
+    height: 100%; 
+    transform: translate(-50%, -50%); 
+    object-fit: cover; 
+    display: block; 
+  }
 }
 
 /* GLOBAL PAGE TRANSITION CURTAIN */
@@ -136,7 +146,7 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 /* Main content layout overlay */
 .content-overlay { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 90px 20px 40px 20px; z-index: 2; overflow-y: auto; }
 
-/* CLEAN INTRO TEXT ENTRY ANIMATION (Glitch filters removed) */
+/* CLEAN INTRO TEXT ENTRY ANIMATION */
 @keyframes glitchIntro {
   0% { opacity: 0; transform: translateY(10px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -144,7 +154,7 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
 /* Much Smaller Home Page Company Logo Setup */
 .company-logo { 
-  max-width: 180px; /* Reduced further from 320px for a clean, minimalist profile layout */
+  max-width: 180px; 
   height: auto; 
   display: block; 
   filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5)); 
@@ -171,7 +181,7 @@ body.loaded p.blurb {
 @media (max-width: 768px) {
   .top-navbar { padding: 0 20px; height: 60px; justify-content: flex-end; }
   .menu-toggle { display: flex; }
-  .company-logo { max-width: 130px; } /* Proportional scaling down for compact mobile views */
+  .company-logo { max-width: 130px; } 
   p.blurb { font-size: 1.1rem; }
   .dropdown { position: static; width: auto; }
   .dropdown-trigger { display: none; }
