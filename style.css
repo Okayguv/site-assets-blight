@@ -650,9 +650,16 @@ body.loaded .forms-wrapper {
 
 @media (min-width: 769px) {
   #blighters-body .forms-wrapper {
-    max-width: 750px !important;
+    max-width: 850px !important;
     width: 100%;
   }
 }
+
+@media (max-width: 768px) {
+  #blighters-body .content-overlay {
+    padding-top: 15px !important;
+  }
+}
+
 
 
