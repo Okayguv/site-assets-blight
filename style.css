@@ -14,7 +14,7 @@ body, html {
   overflow-x: hidden; 
 }
 
-/* Master Fullscreen Background Container Frame */
+
 .fullscreen-bg {
   position: fixed; 
   top: 0;
@@ -26,7 +26,7 @@ body, html {
   background-color: #000;
 }
 
-/* Absolute Positioning Centering Engine Framework */
+
 .static-bg-image,
 .desktop-video,
 .mobile-video {
@@ -44,19 +44,19 @@ body, html {
   z-index: 1;
 }
 
-/* Widescreen asset stream enabled on desktop panels */
+
 .desktop-video {
   display: block !important;
   z-index: 2;
 }
 
-/* Mobile asset stream hidden on desktop panels */
+
 .mobile-video {
   display: none !important;
   z-index: 2;
 }
 
-/* RESPONSIVE SMARTPHONE ORIENTATION OVERRIDES */
+
 @media (max-width: 768px) {
   .desktop-video {
     display: none !important;
@@ -549,9 +549,9 @@ body.loaded .forms-wrapper {
   z-index: 5;
 }
 
-/* Widescreen Banner Layout Framework Window Frame */
+
 #blighters-body .fullscreen-bg { 
-  position: relative !important; /* Forces layout tracking flow */
+  position: relative !important; 
   width: 100vw; 
   height: 56.25vw; 
   min-height: 40vh;
@@ -559,10 +559,10 @@ body.loaded .forms-wrapper {
   overflow: hidden; 
   z-index: 1; 
   background-color: #000;
-  display: block !important; /* Keeps the frame open and visible */
+  display: block !important;
 }
 
-/* Master Video Sizing Calculations */
+
 #blighters-body .fullscreen-bg .desktop-video,
 #blighters-body .fullscreen-bg .mobile-video {
   display: block;
@@ -576,29 +576,29 @@ body.loaded .forms-wrapper {
   transform: none !important; 
 }
 
-/* Hide mobile version loops when loading on widescreen computer monitors */
+
 #blighters-body .fullscreen-bg .mobile-video {
   display: none !important; 
 }
 
-/* SINGLE CONSOLIDATED MOBILE TRIGGER QUERY OVERRIDES */
+
 @media (max-width: 768px) {
   h1 { font-size: 2.2rem; }
   p.content-text { font-size: 1.1rem; }
   .stacked-png-1, .stacked-png-2 { max-width: 220px; } 
   
-  /* Restructures the video frame block dynamically for portrait phone screens */
+
   #blighters-body .fullscreen-bg {
     height: 60vh !important; 
     max-height: none !important;
   }
 
-  /* Shuts down widescreen asset loop on mobile screens */
+
   #blighters-body .fullscreen-bg .desktop-video { 
     display: none !important; 
   }
   
-  /* Activates mobile vertical loop smoothly */
+
   #blighters-body .fullscreen-bg .mobile-video { 
     display: block !important; 
     position: absolute;
@@ -612,4 +612,15 @@ body.loaded .forms-wrapper {
     filter: none !important;
   }
 }
+
+
+#blighters-body .content-overlay {
+  padding-top: 30px !important; 
+}
+
+
+#blighters-body .content-overlay p.blurb:first-of-type {
+  margin-top: 0 !important;
+}
+
 
