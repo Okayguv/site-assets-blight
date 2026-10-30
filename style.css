@@ -542,3 +542,24 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
   margin-top: 15px; 
 }
 
+/* --- Microsoft Forms Layout Container --- */
+.forms-wrapper {
+  width: 100%;
+  max-width: 480px; /* Constrains the width to match a clean newsletter size */
+  margin-top: 30px;
+  background-color: rgba(0, 0, 0, 0.4); /* Subtle backing shade over the background video */
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+/* Page entry animation link hook */
+body.loaded .forms-wrapper {
+  animation: fadeIntro 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.45s;
+}
+
