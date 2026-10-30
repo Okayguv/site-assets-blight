@@ -631,3 +631,11 @@ body.loaded .forms-wrapper {
 }
 
 
+@media (min-width: 769px) {
+  #blighters-body .forms-wrapper {
+    max-width: 750px !important;
+    width: 100%;
+  }
+}
+
+
