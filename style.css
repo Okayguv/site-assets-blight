@@ -536,3 +536,9 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 .fullscreen-bg .mobile-video {
   z-index: 2;
 }
+
+/* Creates a comfortable cinematic vertical separation between text lines */
+.content-overlay p.blurb + p.blurb {
+  margin-top: 15px; 
+}
+
