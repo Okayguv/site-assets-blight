@@ -500,3 +500,21 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
   color: #fff;
   transform: scale(1.1);
 }
+
+.static-bg-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  object-fit: cover; /* Spans across display margins comfortably with no stretch distortion */
+  z-index: 1; /* Pinned right underneath your video layers */
+  filter: brightness(0.4); /* Subtle ambient dark shading to keep text perfectly legible */
+}
+
+/* Adjusting video stacks to cleanly overlay on top of the image layer once loaded */
+.fullscreen-bg .desktop-video,
+.fullscreen-bg .mobile-video {
+  z-index: 2;
+}
