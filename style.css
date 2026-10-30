@@ -639,7 +639,7 @@ body.loaded .forms-wrapper {
 }
 
 #blighters-body .content-overlay {
-  padding-top: 30px !important; 
+  padding-top: 0px !important; 
 }
 
 #blighters-body .content-overlay p.blurb:first-of-type {
