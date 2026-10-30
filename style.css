@@ -562,6 +562,17 @@ body.loaded .forms-wrapper {
   display: block !important;
 }
 
+#blighters-body .fullscreen-bg { 
+  position: relative !important; 
+  width: 100vw; 
+  height: 56.25vw; 
+  min-height: 40vh;
+  max-height: 70vh; 
+  overflow: hidden; 
+  z-index: 1; 
+  background-color: #000;
+  display: block !important;
+}
 
 #blighters-body .fullscreen-bg .desktop-video,
 #blighters-body .fullscreen-bg .mobile-video {
@@ -576,11 +587,9 @@ body.loaded .forms-wrapper {
   transform: none !important; 
 }
 
-
 #blighters-body .fullscreen-bg .mobile-video {
   display: none !important; 
 }
-
 
 @media (max-width: 768px) {
   h1 { font-size: 2.2rem; }
@@ -589,10 +598,10 @@ body.loaded .forms-wrapper {
   
 
   #blighters-body .fullscreen-bg {
-    height: 60vh !important; 
+    height: 56.25vw !important; 
     max-height: none !important;
+    width: 100vw !important;
   }
-
 
   #blighters-body .fullscreen-bg .desktop-video { 
     display: none !important; 
@@ -606,18 +615,16 @@ body.loaded .forms-wrapper {
     left: 0;
     width: 100% !important;
     height: 100% !important; 
-    object-fit: cover !important;
+    object-fit: contain !important; 
     object-position: center !important;
     transform: none !important; 
     filter: none !important;
   }
 }
 
-
 #blighters-body .content-overlay {
   padding-top: 30px !important; 
 }
-
 
 #blighters-body .content-overlay p.blurb:first-of-type {
   margin-top: 0 !important;
