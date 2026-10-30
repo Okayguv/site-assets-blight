@@ -326,15 +326,88 @@ body.loaded p.content-text { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
   object-fit: cover;
 }
 
-/* --- Cinematic Full-Screen Lightbox Close Up Modal --- */
+/* --- Cinematic Centered Vertical Gallery Layout --- */
+.image-gallery-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers everything horizontally on the screen */
+  width: 100%;
+  margin-top: 50px;
+  gap: 40px; /* Adds comfortable cinematic separation between the screens */
+  padding: 0 40px 80px 40px; /* Adds padding to prevent clipping on outer viewport edges */
+}
+
+.gallery-link {
+  display: block;
+  width: 100%;
+  /* 🖥️ 16:9 Constraint: Keeps 2560x1000 images comfortably scaled on regular monitors */
+  max-width: 1100px; 
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 8px; /* Smooth corners for a modern UI layout feel */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65); /* Elegant backdrop drop-shadow depth */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.gallery-img-vertical {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain; /* Keeps 2560x1000 geometry rendering without scaling crop cuts */
+  opacity: 0;
+  transform: translateY(30px);
+  
+  /* Blends entrance animations and hover camera effects flawlessly */
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.4s ease;
+  filter: brightness(0.85); /* Matches atmospheric tone */
+}
+
+/* --- Clean Staggered Entrance Animations --- */
+body.loaded .gallery-img-vertical {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timed delay loops to roll out top images sequentially on execution load */
+body.loaded .gallery-link:nth-child(1) .gallery-img-vertical { transition-delay: 0.35s; }
+body.loaded .gallery-link:nth-child(2) .gallery-img-vertical { transition-delay: 0.5s; }
+body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay: 0.65s; }
+
+/* Desktop Interactive Micro-Behaviors */
+@media (min-width: 769px) {
+  .gallery-link:hover .gallery-img-vertical {
+    filter: brightness(1.05); /* Gently wakes up color profile */
+    transform: scale(1.02); /* Clean interactive camera glide feel */
+  }
+}
+
+/* Mobile Screens Adjustments */
+@media (max-width: 768px) {
+  .image-gallery-vertical {
+    margin-top: 30px;
+    padding: 0 20px 40px 20px;
+    gap: 25px;
+  }
+  .gallery-link {
+    max-width: 100%;
+  }
+  .gallery-img-vertical {
+    filter: brightness(0.95);
+  }
+}
+
+
 .lightbox-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.95); /* Deep matte dimming overlay */
-  z-index: 10000; /* Positions the close-up completely on top of navbar and background */
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -343,15 +416,14 @@ body.loaded p.content-text { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
 }
 
-/* Toggled seamlessly by JS script layer */
 .lightbox-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
 .lightbox-content {
-  max-width: 90vw;
-  max-height: 85vh;
+  max-width: 95vw; 
+  max-height: 90vh;
   object-fit: contain;
   border-radius: 4px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
@@ -380,12 +452,3 @@ body.loaded p.content-text { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
   color: #fff;
   transform: scale(1.1);
 }
-
-@media (max-width: 768px) {
-  .lightbox-close {
-    top: 20px;
-    right: 25px;
-    font-size: 35px;
-  }
-}
-
