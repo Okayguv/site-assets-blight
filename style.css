@@ -106,15 +106,16 @@ body.exiting .page-transition-curtain { opacity: 1; transition: opacity 0.25s ea
   top: 0; 
   left: 0; 
   width: 100%; 
-  padding: 0 40px; 
-  height: 70px;
+  padding: 5px 40px; 
+  height: auto;     
   display: flex; 
   justify-content: flex-start; 
   align-items: center;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+  background: #000000; 
   opacity: 0;
   z-index: 100;
 }
+
 
 
 body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
