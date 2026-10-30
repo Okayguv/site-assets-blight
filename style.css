@@ -500,8 +500,8 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 
 .lightbox-close { 
   position: fixed;
-  top: 50px; 
-  right: 50px; 
+  top: 120px; 
+  right: 120px; 
   color: rgba(255, 255, 255, 0.6); 
   font-size: 80px; 
   font-weight: 200; 
@@ -658,9 +658,13 @@ body.loaded .forms-wrapper {
 
 @media (max-width: 768px) {
   #blighters-body .content-overlay {
-    padding-top: 0px !important;
+    padding-top: 10px !important;    
+    padding-left: 15px !important; 
+    padding-right: 15px !important;
+    padding-bottom: 15px !important;
   }
 }
+
 
 
 
