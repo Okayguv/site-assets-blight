@@ -16,7 +16,7 @@ body, html {
 
 /* --- Global Fallback Layout Pipeline for non-Blighters pages (like index.html) --- */
 .fullscreen-bg {
-  position: fixed; /* Keeps the main homepage background locked as a solid window backdrop */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100vw;
@@ -26,9 +26,10 @@ body, html {
   background-color: #000;
 }
 
-/* Base style overrides to show videos globally unless overridden by specific rules */
-.desktop-video {
-  display: block !important;
+/* 🎬 RAW BACKDROP LAYERS (Full native exposure, colors, and zero dimming filters) */
+.static-bg-image,
+.desktop-video,
+.mobile-video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -36,11 +37,21 @@ body, html {
   height: 100vh;
   transform: translate(-50%, -50%) !important;
   object-fit: cover;
+  filter: none !important; /* 🌟 Ensures 100% full native brightness and contrast */
+}
+
+.static-bg-image {
+  z-index: 1;
+}
+
+.desktop-video {
+  display: block !important;
   z-index: 2;
 }
 
 .mobile-video {
   display: none !important;
+  z-index: 2;
 }
 
 /* Global Responsive Breakpoint Engines for Default Layout wrappers */
@@ -50,16 +61,9 @@ body, html {
   }
   .mobile-video {
     display: block !important;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100vh;
-    transform: translate(-50%, -50%) !important;
-    object-fit: cover;
-    z-index: 2;
   }
 }
+
 
 
 
