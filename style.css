@@ -316,68 +316,17 @@ body.loaded .wishlist-link {
 }
 
 
-/* Widescreen Banner Layout Framework Window Frame */
-#blighters-body .fullscreen-bg { 
-  position: relative !important; /* Forces layout tracking flow */
-  width: 100vw; 
-  height: 56.25vw; 
-  min-height: 40vh;
-  max-height: 70vh; 
-  overflow: hidden; 
-  z-index: 1; 
-  background-color: #000;
-  display: block !important; /* Keeps the frame open and visible */
-}
-
-/* Master Video Sizing Calculations */
-#blighters-body .fullscreen-bg .desktop-video,
-#blighters-body .fullscreen-bg .mobile-video {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important; 
-  object-position: center !important;
-  transform: none !important; 
-}
-
-/* Hide mobile version loops when loading on widescreen computer monitors */
-#blighters-body .fullscreen-bg .mobile-video {
-  display: none !important; 
-}
-
-/* SINGLE CONSOLIDATED MOBILE TRIGGER QUERY OVERRIDES */
-@media (max-width: 768px) {
-  h1 { font-size: 2.2rem; }
-  p.content-text { font-size: 1.1rem; }
-  .stacked-png-1, .stacked-png-2 { max-width: 220px; } 
-  
-  /* Restructures the video frame block dynamically for portrait phone screens */
-  #blighters-body .fullscreen-bg {
-    height: 60vh !important; 
-    max-height: none !important;
-  }
-
-  /* Shuts down widescreen asset loop on mobile screens */
-  #blighters-body .fullscreen-bg .desktop-video { 
-    display: none !important; 
-  }
-  
-  /* Activates mobile vertical loop smoothly */
-  #blighters-body .fullscreen-bg .mobile-video { 
-    display: block !important; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important; 
-    object-fit: cover !important;
-    object-position: center !important;
-    transform: none !important; 
-    filter: none !important;
-  }
+.content-overlay { 
+  position: relative; 
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: center; 
+  text-align: center; 
+  /* Maintains your 120px top padding and keeps our working 180px footer adjustment intact */
+  padding: 120px 20px 180px 20px; 
+  z-index: 2; 
 }
 
 
