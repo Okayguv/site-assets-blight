@@ -188,26 +188,26 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 40px 20px 180px 20px; 
+  padding: 40px 20px 120px 20px; 
   z-index: 2;
 }
 
 
 
 @keyframes fadeIntro {
-  0% { opacity: 0; transform: translateY(10px); }
+  0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
 
 .company-logo {
   display: block;
-  width: 140px;      
+  width: 120px;      
   max-width: 100%;   
   height: auto; 
   
 
-  margin-top: 80px; 
+  margin-top: 40px; 
   margin-bottom: 30px; 
   
   filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5));
@@ -216,8 +216,8 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
 
 body.loaded .company-logo {
-  animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.15s;
+  animation: fadeIntro 0.6s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  animation-delay: 0.20s;
 }
 
 
@@ -334,7 +334,7 @@ body.loaded .wishlist-link {
   text-align: center;
   width: 100%;
   min-height: 100vh;
-  padding: 120px 20px 180px 20px; 
+  padding: 120px 20px 140px 20px; 
   z-index: 10;
 }
 
@@ -403,7 +403,7 @@ body.loaded p.content-text {
   display: block;
   width: 100%;
   
-  max-width: 1100px; 
+  max-width: 1920px; 
   overflow: hidden;
   text-decoration: none;
   cursor: pointer;
@@ -421,7 +421,7 @@ body.loaded p.content-text {
   transform: translateY(30px);
   
  
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
               opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.4s ease;
   filter: brightness(0.85);
@@ -639,7 +639,7 @@ body.loaded .forms-wrapper {
 }
 
 #blighters-body .content-overlay {
-  padding-top: 0px !important; 
+  padding-top: 30px !important; 
 }
 
 #blighters-body .content-overlay p.blurb:first-of-type {
