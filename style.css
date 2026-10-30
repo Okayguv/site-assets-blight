@@ -173,15 +173,14 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
 .content-overlay {
   position: relative;
-  display: flex !important; 
+  display: flex !important;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  width: 100%; 
-  min-height: 100vh;
-  padding: 120px 20px 180px 20px; 
-  z-index: 10;
+  width: 100%;
+  padding: 40px 20px 180px 20px; 
+  z-index: 2;
 }
 
 
@@ -318,16 +317,13 @@ body.loaded .wishlist-link {
 
 
 #blighters-body .fullscreen-bg { 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
+  position: relative; 
   width: 100vw; 
-  height: 100vh; 
+  height: 50vh;       
   overflow: hidden; 
   z-index: 1; 
   background-color: #000;
 }
-
 
 #blighters-body .desktop-video {
   display: block !important;
