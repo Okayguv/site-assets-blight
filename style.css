@@ -54,7 +54,7 @@ body, html {
   z-index: 2;
 }
 
-/* Global Responsive Breakpoint Engines for Default Layout wrappers */
+
 @media (max-width: 768px) {
   .desktop-video {
     display: none !important;
@@ -123,12 +123,12 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hamburger Animations */
+
 .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
 .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* Dropdown Menu Architecture */
+
 .dropdown { position: relative; display: inline-block; }
 .dropdown-trigger { color: #fff; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; background: transparent; border: none; cursor: pointer; padding: 10px 15px; display: flex; align-items: center; gap: 8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.8); text-decoration: none; }
 .dropdown-trigger::after { content: '▼'; font-size: 0.7rem; transition: transform 0.3s ease; }
@@ -150,7 +150,7 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   opacity: 0; visibility: hidden; transform: translateX(10px); transition: all 0.25s ease; list-style: none;
 }
 
-/* Desktop Hover Mechanics */
+
 @media (min-width: 769px) {
   .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
   .dropdown:hover .dropdown-trigger { color: #ddd; }
@@ -160,21 +160,21 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   .sub-menu a:hover { background-color: rgba(255, 255, 255, 0.12); }
 }
 
-/* Main content layout overlay */
+
 .content-overlay { 
   position: relative; 
   min-height: 100vh; 
   display: flex; 
   flex-direction: column; 
-  justify-content: flex-start; /* Aligns layout to start from top so gallery tracks downwards */
+  justify-content: flex-start; 
   align-items: center; 
   text-align: center; 
   padding: 120px 20px 80px 20px; 
-  z-index: 2; /* Forces content stack to overlay beautifully over fixed z-index: 0 video */
+  z-index: 2; 
 }
 
 
-/* CLEAN INTRO TEXT ENTRY ANIMATION */
+
 @keyframes fadeIntro {
   0% { opacity: 0; transform: translateY(10px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -202,7 +202,7 @@ body.loaded .company-logo {
 }
 
 
-/* Ensure your text overlay sits cleanly below the logo container context */
+
 p.blurb {
   font-size: 1.4rem;
   font-weight: 300;
@@ -219,7 +219,7 @@ body.loaded p.blurb {
 }
 
 
-/* Mobile Responsive Navigation Overlay Adjustments */
+
 @media (max-width: 768px) {
   .top-navbar { padding: 0 20px; height: 60px; justify-content: flex-end; }
   .menu-toggle { display: flex; }
@@ -363,7 +363,7 @@ body.loaded .wishlist-link {
   #blighters-body .desktop-video { display: none !important; }
 }
 
-/* --- Sub-page Headers & Content Layouts (About & Team) --- */
+
 h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); opacity: 0; }
 body.loaded h1 { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.15s; }
 
@@ -380,39 +380,39 @@ body.loaded p.content-text { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
   justify-content: center;
   gap: 20px;
   margin-top: 25px;
-  flex-wrap: wrap; /* Makes it look great on mobile phones too */
+  flex-wrap: wrap; 
 }
 
 .gallery-img {
   width: 100%;
-  max-width: 300px; /* Limits the sizing so they don't cover the screen */
+  max-width: 300px; 
   height: auto;
-  border-radius: 8px; /* Smooths down sharp edges */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Gives depth over the background video */
+  border-radius: 8px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
   object-fit: cover;
 }
 
-/* --- Cinematic Centered Vertical Gallery Layout --- */
+
 .image-gallery-vertical {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers everything horizontally on the screen */
+  align-items: center;
   width: 100%;
   margin-top: 50px;
-  gap: 40px; /* Adds comfortable cinematic separation between the screens */
-  padding: 0 40px 80px 40px; /* Adds padding to prevent clipping on outer viewport edges */
+  gap: 40px; 
+  padding: 0 40px 80px 40px; 
 }
 
 .gallery-link {
   display: block;
   width: 100%;
-  /* 🖥️ 16:9 Constraint: Keeps 2560x1000 images comfortably scaled on regular monitors */
+  
   max-width: 1100px; 
   overflow: hidden;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 8px; /* Smooth corners for a modern UI layout feel */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65); /* Elegant backdrop drop-shadow depth */
+  border-radius: 8px; 
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65); 
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -420,37 +420,37 @@ body.loaded p.content-text { animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain; /* Keeps 2560x1000 geometry rendering without scaling crop cuts */
+  object-fit: contain; 
   opacity: 0;
   transform: translateY(30px);
   
-  /* Blends entrance animations and hover camera effects flawlessly */
+ 
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
               opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.4s ease;
-  filter: brightness(0.85); /* Matches atmospheric tone */
+  filter: brightness(0.85);
 }
 
-/* --- Clean Staggered Entrance Animations --- */
+
 body.loaded .gallery-img-vertical {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Timed delay loops to roll out top images sequentially on execution load */
+
 body.loaded .gallery-link:nth-child(1) .gallery-img-vertical { transition-delay: 0.35s; }
 body.loaded .gallery-link:nth-child(2) .gallery-img-vertical { transition-delay: 0.5s; }
 body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay: 0.65s; }
 
-/* Desktop Interactive Micro-Behaviors */
+
 @media (min-width: 769px) {
   .gallery-link:hover .gallery-img-vertical {
-    filter: brightness(1.05); /* Gently wakes up color profile */
-    transform: scale(1.02); /* Clean interactive camera glide feel */
+    filter: brightness(1.05);
+    transform: scale(1.02);
   }
 }
 
-/* Mobile Screens Adjustments */
+
 @media (max-width: 768px) {
   .image-gallery-vertical {
     margin-top: 30px;
@@ -526,28 +526,27 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
   width: 100vw;
   height: 100vh;
   transform: translate(-50%, -50%);
-  object-fit: cover; /* Spans across display margins comfortably with no stretch distortion */
-  z-index: 1; /* Pinned right underneath your video layers */
-  filter: brightness(0.4); /* Subtle ambient dark shading to keep text perfectly legible */
+  object-fit: cover;
+  z-index: 1; 
+  filter: brightness(0.4);
 }
 
-/* Adjusting video stacks to cleanly overlay on top of the image layer once loaded */
+
 .fullscreen-bg .desktop-video,
 .fullscreen-bg .mobile-video {
   z-index: 2;
 }
 
-/* Creates a comfortable cinematic vertical separation between text lines */
 .content-overlay p.blurb + p.blurb {
   margin-top: 15px; 
 }
 
-/* --- Microsoft Forms Layout Container --- */
+
 .forms-wrapper {
   width: 100%;
-  max-width: 480px; /* Constrains the width to match a clean newsletter size */
+  max-width: 480px; 
   margin-top: 30px;
-  background-color: rgba(0, 0, 0, 0.4); /* Subtle backing shade over the background video */
+  background-color: rgba(0, 0, 0, 0.4); 
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -557,9 +556,29 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
   transform: translateY(15px);
 }
 
-/* Page entry animation link hook */
+
 body.loaded .forms-wrapper {
   animation: fadeIntro 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.45s;
 }
+
+
+.bg-overlay-fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); 
+  opacity: 0; 
+  transition: opacity 0.1s linear; 
+  pointer-events: none; 
+  z-index: -1; 
+}
+
+
+.content-overlay {
+  padding-bottom: 100px;
+}
+
 
