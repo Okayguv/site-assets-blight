@@ -550,8 +550,9 @@ body.loaded .forms-wrapper {
 }
 
 
+
 #blighters-body .fullscreen-bg { 
-  position: relative !important; 
+  position: relative !important;
   width: 100vw; 
   height: 56.25vw; 
   min-height: 40vh;
@@ -586,24 +587,25 @@ body.loaded .forms-wrapper {
   p.content-text { font-size: 1.1rem; }
   .stacked-png-1, .stacked-png-2 { max-width: 220px; } 
 
-  
+
   #blighters-body .fullscreen-bg {
+    position: relative !important; 
     height: 56.25vw !important; 
     max-height: none !important;
     width: 100vw !important;
   }
 
- 
+
   #blighters-body .fullscreen-bg .desktop-video { 
     display: none !important; 
   }
   
-  
+
   #blighters-body .fullscreen-bg .mobile-video { 
     display: block !important; 
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: absolute !important; 
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
     height: 100% !important; 
     object-fit: contain !important; 
@@ -620,6 +622,7 @@ body.loaded .forms-wrapper {
 #blighters-body .content-overlay p.blurb:first-of-type {
   margin-top: 0 !important;
 }
+
 
 
 @media (min-width: 769px) {
