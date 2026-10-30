@@ -202,7 +202,7 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
 .company-logo {
   display: block;
-  width: 120px;      
+  width: 100px;      
   max-width: 100%;   
   height: auto; 
   
@@ -225,7 +225,7 @@ body.loaded .company-logo {
 p.blurb {
   font-size: 1.4rem;
   font-weight: 300;
-  max-width: 600px;
+  max-width: 500px;
   text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
   line-height: 1.6;
   letter-spacing: 0.5px;
@@ -396,7 +396,7 @@ body.loaded p.content-text {
   width: 100%;
   margin-top: 50px;
   gap: 40px; 
-  padding: 0 40px 80px 40px; 
+  padding: 0 40px 80px 120px; 
 }
 
 .gallery-link {
