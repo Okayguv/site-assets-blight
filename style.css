@@ -770,6 +770,7 @@ html {
   justify-content: center;
   align-items: center;
   gap: 25px;
+  flex-wrap: wrap; /* Guarantees clean wrapping if the screen gets exceptionally thin */
 }
 
 .social-btn {
@@ -819,4 +820,5 @@ html {
     letter-spacing: 1.5px;
   }
 }
+
 
