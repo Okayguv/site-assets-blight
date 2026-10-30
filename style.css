@@ -14,7 +14,7 @@ body, html {
   overflow-x: hidden; 
 }
 
-/* --- Global Fallback Layout Pipeline for non-Blighters pages (like index.html) --- */
+
 .fullscreen-bg {
   position: fixed; 
   top: 0;
@@ -26,7 +26,7 @@ body, html {
   background-color: #000;
 }
 
-/* 🎬 RAW BACKDROP LAYERS (Full native exposure, colors, and zero dimming filters) */
+
 .static-bg-image,
 .desktop-video,
 .mobile-video {
@@ -37,7 +37,7 @@ body, html {
   height: 100vh;
   transform: translate(-50%, -50%) !important;
   object-fit: cover;
-  filter: none !important; /* 🌟 Ensures 100% full native brightness and contrast */
+  filter: none !important;
 }
 
 .static-bg-image {
@@ -67,7 +67,7 @@ body, html {
 
 
 
-/* Completely disabled layout render pipelines for global background looping clips */
+
 .desktop-video { 
   display: none !important; 
 }
@@ -81,7 +81,7 @@ body, html {
   .mobile-video { display: none !important; }
 }
 
-/* GLOBAL PAGE TRANSITION CURTAIN */
+
 .page-transition-curtain {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background-color: #0d0d0d; z-index: 9999; pointer-events: none;
@@ -91,7 +91,7 @@ body, html {
 body.loaded .page-transition-curtain { opacity: 0; }
 body.exiting .page-transition-curtain { opacity: 1; transition: opacity 0.25s ease-in; }
 
-/* Top Navigation Bar Container */
+
 .top-navbar {
   position: fixed; top: 0; left: 0; width: 100%; padding: 0 40px; height: 70px;
   display: flex; justify-content: flex-start; align-items: center;
@@ -101,7 +101,7 @@ body.exiting .page-transition-curtain { opacity: 1; transition: opacity 0.25s ea
 
 body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
 
-/* Mobile Hamburger Button Setup */
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -180,26 +180,27 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* --- High-Resolution Company Logo Pipeline --- */
+
 .company-logo {
   display: block;
-  width: 100%;
-  max-width: 500px; /* Comfortably bounds the unpadded logo asset on desktop monitors */
-  height: auto;
+  width: 140px;      
+  max-width: 100%;   
+  height: auto; 
   
-  /* 📐 Layout Engine: Safely pushes the logo 80px down from the top navbar boundaries */
+
   margin-top: 80px; 
-  margin-bottom: 30px; /* Creates a balanced visual gap before the text blurb underneath */
+  margin-bottom: 30px; 
   
   filter: drop-shadow(0 4px 15px rgba(0,0,0,0.5));
   opacity: 0;
 }
 
-/* Connects the logo directly to your shared page-load engine animation */
+
 body.loaded .company-logo {
   animation: fadeIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.15s;
 }
+
 
 /* Ensure your text overlay sits cleanly below the logo container context */
 p.blurb {
