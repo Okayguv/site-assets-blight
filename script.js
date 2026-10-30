@@ -65,3 +65,39 @@ document.querySelectorAll('.transition-link').forEach(link => {
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lightboxOverlay = document.getElementById("lightbox-overlay");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxClose = document.querySelector(".lightbox-close");
+  const triggers = document.querySelectorAll(".lightbox-trigger");
+
+  // Open Lightbox Event Pipeline
+  triggers.forEach(trigger => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault(); // Blocks the link from running a normal page jump
+      const imageSrc = trigger.getAttribute("href");
+      
+      lightboxImg.setAttribute("src", imageSrc);
+      lightboxOverlay.classList.add("active");
+    });
+  });
+
+  // Close Lightbox Callback Logic
+  const closeLightbox = () => {
+    lightboxOverlay.classList.remove("active");
+    setTimeout(() => {
+      lightboxImg.setAttribute("src", ""); // Empties src to release active system memory
+    }, 400);
+  };
+
+  lightboxClose.addEventListener("click", closeLightbox);
+  
+  // Close seamlessly if user clicks out on the dark background mask wrapper
+  lightboxOverlay.addEventListener("click", (e) => {
+    if (e.target === lightboxOverlay) {
+      closeLightbox();
+    }
+  });
+});
+
