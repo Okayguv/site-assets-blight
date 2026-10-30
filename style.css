@@ -334,7 +334,7 @@ body.loaded .wishlist-link {
   text-align: center;
   width: 100%;
   min-height: 100vh;
-  padding: 120px 20px 140px 20px; 
+  padding: 120px 0px 120px 0px; 
   z-index: 10;
 }
 
@@ -498,17 +498,18 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
   transform: scale(1);
 }
 
-.lightbox-close {
-  position: absolute;
-  top: 120px;
-  right: 120px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 80px;
-  font-weight: 200;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.2s ease;
-  user-select: none;
+.lightbox-close { 
+  position: fixed;
+  top: 50px; 
+  right: 50px; 
+  color: rgba(255, 255, 255, 0.6); 
+  font-size: 80px; 
+  font-weight: 200; 
+  cursor: pointer; 
+  transition: color 0.2s ease, transform 0.2s ease; 
+  user-select: none; 
 }
+
 
 .lightbox-close:hover {
   color: #fff;
