@@ -169,6 +169,11 @@ body.loaded .top-navbar { opacity: 1; transition: opacity 0.8s ease; }
   .sub-menu a:hover { background-color: rgba(255, 255, 255, 0.12); }
 }
 
+  
+ 
+}
+
+
 
 
 .content-overlay {
@@ -244,7 +249,8 @@ body.loaded p.blurb {
     background-color: rgba(10, 10, 10, 0.98); border: none; border-radius: 0;
     padding: 100px 30px 40px 30px; display: flex; flex-direction: column; gap: 15px;
     overflow-y: auto; opacity: 0; visibility: hidden; transform: translateY(-20px);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 15;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
+    z-index: 105;
   }
   
   .dropdown-menu.mobile-open { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -263,6 +269,7 @@ body.loaded p.blurb {
   .nested-dropdown.submenu-open .sub-menu { max-height: 200px; opacity: 1; visibility: visible; padding: 5px 0; }
   .sub-menu a { font-size: 1.1rem; font-weight: 400; padding: 10px 20px; text-transform: none; border: none; }
 }
+
 
 
 .logo-container { margin-bottom: 20px; display: flex; justify-content: center; align-items: center; opacity: 0; }
