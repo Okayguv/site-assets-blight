@@ -657,7 +657,7 @@ body.loaded .forms-wrapper {
 
 @media (max-width: 768px) {
   #blighters-body .content-overlay {
-    padding-top: 15px !important;
+    padding-top: 0px !important;
   }
 }
 
