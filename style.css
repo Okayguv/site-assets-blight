@@ -14,18 +14,22 @@ body, html {
   overflow-x: hidden; 
 }
 
-/* --- Shared Background Engine - Hard Locked Video Canvas --- */
+/* --- Global Body Base Layer Fix --- */
+#blighters-body {
+  background-color: #0d0d0d; /* Deep matte black that matches your page-transition curtain */
+}
+
+/* --- Shared Background Engine - Anchored Absolute Video Canvas --- */
 #blighters-body .fullscreen-bg { 
-  position: fixed !important; /* Force layout context to lock to monitor glass viewport */
+  position: absolute !important; /* Fixed to the absolute top of the page framework */
   top: 0 !important; 
   left: 0 !important; 
-  width: 100vw !important; /* Locks width dynamically across browser edges */
-  height: 100vh !important; /* Locks height dynamically across browser edges */
+  width: 100vw !important; 
+  height: 100vh !important; /* Limits the video height strictly to the initial viewport window */
   overflow: hidden; 
-  z-index: 0 !important; /* Pushes pipeline completely behind scrolling document layers */
+  z-index: 0 !important; /* Keeps video behind your content overlays */
   background-color: #000;
-  transform: none !important; /* Blocks parent container element transform inheritance values */
-  pointer-events: none; /* Allows mouse wheels to scroll smoothly straight through the video */
+  pointer-events: none;
 }
 
 /* 🎬 STABLE BLIGHTERS OVERLAYS (Perfect native desktop canvas centering) */
@@ -45,6 +49,27 @@ body, html {
   display: none !important; 
 }
 
+/* --- Smooth Vignette Gradient Blend over the Video Base --- */
+#blighters-body .content-overlay {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 120px 20px 80px 20px;
+  z-index: 2;
+  /* Creates a gradient that blends the bottom of your video smoothly into the solid background color */
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0) 0%,
+    rgba(13, 13, 13, 0.4) 50%,
+    rgba(13, 13, 13, 1) 95%,
+    #0d0d0d 100%
+  );
+}
+
 @media (max-width: 768px) {
   /* --- Mobile Layout Background Switch Engine --- */
   #blighters-body .desktop-video { 
@@ -62,6 +87,7 @@ body, html {
     filter: none !important;
   }
 }
+
 
 /* Completely disabled layout render pipelines for global background looping clips */
 .desktop-video { 
