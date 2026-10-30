@@ -14,6 +14,33 @@ body, html {
   overflow-x: hidden; 
 }
 
+#home-body .fullscreen-bg {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #000;
+}
+
+#home-body .static-bg-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%) !important;
+  object-fit: cover;
+  z-index: 2;
+  display: block !important;
+}
+
+#home-body .desktop-video,
+#home-body .mobile-video {
+  display: none !important; 
+}
 
 .fullscreen-bg {
   position: fixed; 
@@ -25,7 +52,6 @@ body, html {
   z-index: 1;
   background-color: #000;
 }
-
 
 .static-bg-image,
 .desktop-video,
@@ -44,18 +70,15 @@ body, html {
   z-index: 1;
 }
 
-
 .desktop-video {
   display: block !important;
   z-index: 2;
 }
 
-
 .mobile-video {
   display: none !important;
   z-index: 2;
 }
-
 
 @media (max-width: 768px) {
   .desktop-video {
