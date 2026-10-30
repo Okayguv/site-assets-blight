@@ -334,7 +334,7 @@ body.loaded .wishlist-link {
   text-align: center;
   width: 100%;
   min-height: 100vh;
-  padding: 120px 0px 120px 0px; 
+  padding: 120px 20px 120px 20px; 
   z-index: 10;
 }
 
@@ -396,7 +396,7 @@ body.loaded p.content-text {
   width: 100%;
   margin-top: 50px;
   gap: 40px; 
-  padding: 0 40px 80px 120px; 
+  padding: 20px 40px 80px 120px; 
 }
 
 .gallery-link {
@@ -450,7 +450,7 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 @media (max-width: 768px) {
   .image-gallery-vertical {
     margin-top: 30px;
-    padding: 0 0px 0px 0px;
+    padding: 10px 10px 10px 10px;
     gap: 25px;
   }
   .gallery-link {
@@ -644,7 +644,7 @@ body.loaded .forms-wrapper {
 }
 
 #blighters-body .content-overlay p.blurb:first-of-type {
-  margin-top: 0 !important;
+  margin-top: 20 !important;
 }
 
 
