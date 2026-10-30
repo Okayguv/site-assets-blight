@@ -383,7 +383,7 @@ body.loaded p.content-text {
   width: 100%;
   max-width: 300px; 
   height: auto;
-  border-radius: 8px; 
+  border-radius: 0px; 
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
   object-fit: cover;
 }
@@ -403,13 +403,13 @@ body.loaded p.content-text {
   display: block;
   width: 100%;
   
-  max-width: 1920px; 
+  max-width: 2560px; 
   overflow: hidden;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 8px; 
+  border-radius: 0px; 
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65); 
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 0px solid rgba(255, 255, 255, 0.05);
 }
 
 .gallery-img-vertical {
@@ -441,7 +441,7 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 
 @media (min-width: 769px) {
   .gallery-link:hover .gallery-img-vertical {
-    filter: brightness(1.05);
+    filter: brightness(1.15);
     transform: scale(1.02);
   }
 }
@@ -450,7 +450,7 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 @media (max-width: 768px) {
   .image-gallery-vertical {
     margin-top: 30px;
-    padding: 0 20px 40px 20px;
+    padding: 0 0px 0px 0px;
     gap: 25px;
   }
   .gallery-link {
@@ -500,10 +500,10 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 
 .lightbox-close {
   position: absolute;
-  top: 30px;
-  right: 40px;
+  top: 120px;
+  right: 120px;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 40px;
+  font-size: 80px;
   font-weight: 200;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
@@ -512,7 +512,7 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 
 .lightbox-close:hover {
   color: #fff;
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .static-bg-image {
