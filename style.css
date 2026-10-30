@@ -302,18 +302,19 @@ body.loaded .wishlist-link {
 }
 
 
-.content-overlay { 
-  position: relative; 
-  min-height: 100vh; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: flex-start; 
-  align-items: center; 
-  text-align: center; 
-  /* Maintains your 120px top padding and keeps our working 180px footer adjustment intact */
+.content-overlay {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  min-height: 100vh;
   padding: 120px 20px 180px 20px; 
-  z-index: 2; 
+  z-index: 10;
 }
+
 
 
 
