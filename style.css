@@ -596,7 +596,7 @@ body.loaded .gallery-link:nth-child(3) .gallery-img-vertical { transition-delay:
 
 .forms-wrapper {
   width: 100%;
-  max-width: 480px; 
+  max-width: 780px; 
   margin-top: 30px;
   background-color: rgba(0, 0, 0, 0.4); 
   border-radius: 8px;
